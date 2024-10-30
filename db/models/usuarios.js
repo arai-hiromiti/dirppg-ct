@@ -1,4 +1,5 @@
 'use strict';
+const bcrypt = require('bcrypt');
 const {
   Model
 } = require('sequelize');
@@ -18,8 +19,23 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     senha: DataTypes.STRING
   }, {
+    hooks: {
+      beforeCreate: async (usuario) => {
+        usuario.senha = await bcrypt.hash(usuario.senha, 10);
+      },
+      beforeUpdate: async (usuario) => {
+        if (usuario.changed('senha')) {
+          usuario.senha = await bcrypt.hash(usuario.senha, 10);
+        }
+      }
+    },
     sequelize,
     modelName: 'usuarios',
   });
+
+  usuarios.prototype.validarSenha = async function(senha) {
+    return await bcrypt.compare(senha, this.senha);
+  };
+
   return usuarios;
 };

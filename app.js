@@ -2,10 +2,10 @@ const express = require( 'express');
 
 const app = express();
 
-//middleware
+//middleware recebe os dados
 app.use(express.json());
 
-const users = require('./controllers/users');
+const users = require('./controllers/usuarios');
 
 const db = require("./db/models");
 
