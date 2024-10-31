@@ -6,10 +6,13 @@ const app = express();
 app.use(express.json());
 
 const users = require('./controllers/usuarios');
-
-const db = require("./db/models");
+const nucleos = require('./controllers/nucleos');
+const usuarios_nucleos = require('./controllers/usuarios_nucleos');
 
 app.use('/',users);
+app.use('/',nucleos)
+app.use('/',usuarios_nucleos)
+
 
 app.listen(3030,() =>{
     console.log("Servidor iniciado");

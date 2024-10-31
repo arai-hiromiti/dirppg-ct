@@ -1,8 +1,6 @@
 const express = require ('express');
 const router = express.Router();
-const bcrypt = require('bcrypt');
 const db = require('../db/models');
-const { where } = require('sequelize');
 
 //BUSCAR ID
 router.get("/usuarios/:id",async(req,res)=>{
@@ -61,11 +59,11 @@ router.post("/usuarios", async (req, res) => {
         console.log(dados);
 
         const dadosUsuario = await db.usuarios.create(dados);
-
+        console.log('Usuário cadastrado');
         return res.status(201).json({
-            mensagem: "Usuário cadastrado com sucesso",
             dadosUsuario
         });
+      
     } catch (error) {
         console.error("Erro ao cadastrar usuário:", error);
         

@@ -1,8 +1,6 @@
 const express = require ('express');
 const router = express.Router();
-
-const db = require('./../db/models');
-const { where } = require('sequelize');
+const db = require('../db/models');
 
 //CADASTRAR
 router.post("/nucleos", async (req, res) => {
@@ -11,9 +9,8 @@ router.post("/nucleos", async (req, res) => {
         console.log(dados);
 
         const dadosNucleo = await db.nucleos.create(dados);
-
+        console.log("nucleo cadastrado");
         return res.status(201).json({
-            mensagem: "nucleos cadastrado com sucesso",
             dadosNucleo
         });
     } catch (error) {
@@ -77,13 +74,13 @@ router.delete("/nucleos/:id", async (req, res) => {
     }
 });
 
-router.get("/usuarios/:nome",async(req,res)=>{
+router.get("/nucleos/:nome",async(req,res)=>{
 
     const {nome} = req.params;
 
     const nucleo = await db.nucleos.findOne({
         
-        attribute:['nome'],
+        attributes:['nome'],
         where: {nome},
     });
 
@@ -94,7 +91,9 @@ router.get("/usuarios/:nome",async(req,res)=>{
     }
     else{
         return res.json({
-            mensagem :"Erro ",
+            mensagem :"Nucleo nao encontrado ",
         });
     }
 });
+
+module.exports = router;

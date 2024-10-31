@@ -1,8 +1,7 @@
 const express = require ('express');
 const router = express.Router();
+const db = require('../db/models');
 
-const db = require('./../db/models');
-const { where } = require('sequelize');
 
 // Cadastrar uma nova associação entre usuário e núcleo
 router.post("/usuarios_nucleos", async (req, res) => {
@@ -122,3 +121,6 @@ router.delete("/usuarios/:idUsuario/nucleos/:idNucleo", async (req, res) => {
         });
     }
 });
+
+
+module.exports = router;

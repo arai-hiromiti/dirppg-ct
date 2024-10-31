@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   nucleos.init({
-    name: DataTypes.STRING
+    nome: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'nucleos',
