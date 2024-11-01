@@ -2,16 +2,12 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('usuarios_nucleos', {
-      usuario_id: {
-        type: Sequelize.INTEGER,
+    await queryInterface.createTable('nucleos_editais', {
+      id: {
         allowNull: false,
-        references: {
-          model: 'usuarios',
-          key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
       },
       nucleo_id: {
         type: Sequelize.INTEGER,
@@ -23,19 +19,27 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
+      edital_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'editais',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('NOW')
+        type: Sequelize.DATE
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('NOW')
+        type: Sequelize.DATE
       }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Usuarios_Nucleos');
+    await queryInterface.dropTable('nucleos_editais');
   }
 };

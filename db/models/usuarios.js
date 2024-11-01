@@ -11,7 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+        this.belongsToMany(models.nucleos, {
+        through: 'usuarios_nucleos',
+        as: 'nucleos',
+        foreignKey: 'usuario_id',
+        otherKey: 'nucleo_id',
+      });
     }
   }
   usuarios.init({
@@ -39,3 +44,4 @@ module.exports = (sequelize, DataTypes) => {
 
   return usuarios;
 };
+

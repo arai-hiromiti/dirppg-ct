@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class usuarios_nucleos extends Model {
+  class nucleos_editais extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,16 +13,8 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  usuarios_nucleos.init({
-    usuario_id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      references: {
-        model: 'usuarios',
-        key: 'id'
-      },
-      onDelete: 'CASCADE'
-    },
+  nucleos_editais.init({
+
     nucleo_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -31,13 +23,20 @@ module.exports = (sequelize, DataTypes) => {
         key: 'id'
       },
       onDelete: 'CASCADE'
+    },
+    edital_id:{
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      references: {
+        model: 'editais',
+        key: 'id'
+      },
+      onDelete: 'CASCADE'
+
     }
-   }, {
+  }, {
     sequelize,
-    modelName: 'usuarios_nucleos',
-    timestamps: false
+    modelName: 'nucleos_editais',
   });
-
-
-  return usuarios_nucleos;
+  return nucleos_editais;
 };
