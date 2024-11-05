@@ -79,8 +79,7 @@ router.get("/nucleos/:nome",async(req,res)=>{
     const {nome} = req.params;
 
     const nucleo = await db.nucleos.findOne({
-        
-        attributes:['nome'],
+        attributes:['id'],
         where: {nome},
     });
 

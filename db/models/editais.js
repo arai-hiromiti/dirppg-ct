@@ -4,11 +4,6 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class editais extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
       this.belongsToMany(models.nucleos, {
         through: 'nucleos_editais',
@@ -19,12 +14,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   editais.init({
+    nucleo:DataTypes.STRING,
     link1: DataTypes.STRING,
     link2: DataTypes.STRING,
     descricao: DataTypes.STRING,
     atividade: DataTypes.STRING,
     periodo: DataTypes.STRING,
-    titulo: DataTypes.STRING
+    titulo: DataTypes.STRING,
+    
   }, {
     sequelize,
     modelName: 'editais',

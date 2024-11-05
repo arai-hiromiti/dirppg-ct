@@ -9,6 +9,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      nucleo: {
+        type: Sequelize.STRING
+      },
       link1: {
         type: Sequelize.STRING
       },
