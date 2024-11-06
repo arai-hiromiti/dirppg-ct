@@ -18,6 +18,12 @@ module.exports = {
       senha: {
         type: Sequelize.STRING
       },
+      resetToken:{
+        type: Sequelize.STRING
+      },
+      resetTokenExpiration:{
+        type: Sequelize.DATE
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

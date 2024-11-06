@@ -5,7 +5,8 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "mysql": "^2.18.1",
-    "mysql2": "^3.11.3"
+    "mysql2": "^3.11.3",
+    "nodemailer": "^6.9.16"
   },
   "name": "banco",
   "version": "1.0.0",

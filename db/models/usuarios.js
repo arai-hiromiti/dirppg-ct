@@ -22,7 +22,9 @@ module.exports = (sequelize, DataTypes) => {
   usuarios.init({
     nome: DataTypes.STRING,
     email: DataTypes.STRING,
-    senha: DataTypes.STRING
+    senha: DataTypes.STRING,
+    resetToken:DataTypes.STRING,
+    resetTokenExpiration: DataTypes.DATE,
   }, {
     hooks: {
       beforeCreate: async (usuario) => {
