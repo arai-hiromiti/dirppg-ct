@@ -3,20 +3,21 @@ const nodemailer = require('nodemailer');
 const smtTransporter = nodemailer.createTransport({
     service: 'gmail', 
     auth: {
-      user: 'dirppgcuritiba@gmail.com',
-      pass: 'Jacare325@'
+      user: 'dirppgapp@gmail.com',
+      pass: 'ccku irsh bnfd ummg'
     },
 });
 
 
 async function sendResetEmail(email, token) {
   
-  const resetLink = `exp://172.30.60.55:8081/--/appCalendario/resetarSenha?token=${token}`;
+  const resetLink = `appCalendario://resetarSenha?token=${token}`;
   const mailOptions = {
     from: 'dirppgcuritiba@gmail.com',
     to: email,
     subject: 'Redefinição de Senha',
-    text: `Clique no link para redefinir sua senha: ${resetLink}`
+    text: `Clique no link para redefinir sua senha: ${resetLink}`,
+    html: `<p>Clique no link para redefinir sua senha:</p><a href="${resetLink}">${resetLink}</a>` 
   };
 
   try {
