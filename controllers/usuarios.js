@@ -2,17 +2,27 @@ const express = require ('express');
 const router = express.Router();
 const db = require('../db/models');
 
-router.get("/usuarios/:id",async(req,res)=>{
-    try {
-        const usuario = await db.usuarios.findByPk(req.params.id);
-        if (!usuario) {
-            return res.status(404).json({ mensagem: "Usuário não encontrado" });
-        }
-        res.status(200).json(usuario);
-    } catch (error) {
-        res.status(500).json({ mensagem: "Erro ao buscar usuário", erro: error.message });
+router.get("/usuarios", async(req,res)=>{
+
+    const {email} = req.query;
+
+    const usuario = await db.usuarios.findOne({
+        where: {email},
+    });
+
+    if(usuario){
+        return res.json({
+            usuario:usuario.id,
+        });
     }
+    else{
+        return res.json({
+            mensagem :"Usuario nao encontrado ",
+        });
+    }
+
 });
+
 
 router.post("/usuarios/login", async (req, res) => {
     try {

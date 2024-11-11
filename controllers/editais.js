@@ -2,7 +2,7 @@ const express = require ('express');
 const router = express.Router();
 const db = require('../db/models');
 
-router.post("/editais", async (req, res) => {
+router.post("/editais/:email", async (req, res) => {
     try {
         const { nucleo, link_1, link_2, descricao, atividade, periodo, titulo } = req.body;
         const dados = {
