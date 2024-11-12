@@ -18,12 +18,15 @@ router.post("/usuarios_nucleos", async (req, res) => {
     }
 });
 
-router.get("/usuarios/:id/nucleos", async (req, res) => {
+router.get("/usuarios_nucleos", async (req, res) => {
+    const {usuario_id} = req.query;
     try {
         const associacoes = await db.usuarios_nucleos.findAll({
-            where: { usuario_id: req.params.id }
+            where: {usuario_id}
         });
-        res.status(200).json(associacoes);
+
+        const nucleoIds = associacoes.map(associacao => associacao.nucleo_id);
+        res.status(200).json(nucleoIds);
     } catch (error) {
         res.status(500).json({ mensagem: "Erro ao listar associações", erro: error.message });
     }
