@@ -13,13 +13,13 @@ module.exports = {
         type: Sequelize.STRING
       },
       link1: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(500)
       },
       link2: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(500)
       },
       descricao: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       atividade: {
         type: Sequelize.STRING

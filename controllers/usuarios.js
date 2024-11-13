@@ -11,7 +11,7 @@ router.get("/usuarios", async (req, res) => {
 
         if (usuario) {
             return res.status(200).json({
-                usuario: usuario.id,
+                usuario: usuario,
             });
         } else {
             return res.status(404).json({

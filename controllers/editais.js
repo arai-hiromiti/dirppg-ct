@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require('../db/models');
 const { Op } = require('sequelize');
 
-router.post("/editais/:email", async (req, res) => {
+router.post("/editais", async (req, res) => {
     try {
         const { nucleo, link_1, link_2, descricao, atividade, periodo, titulo } = req.body;
         const dados = {
