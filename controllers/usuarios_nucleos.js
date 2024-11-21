@@ -45,7 +45,6 @@ router.put("/usuarios_nucleo/:id", async (req, res) => {
     }
 });
 
-// Excluir associação entre usuário e núcleo
 router.delete("/usuarios_nucleos/:id", async (req, res) => {
     try {
         const associacao = await db.usuarios_nucleos.findByPk(req.params.id);

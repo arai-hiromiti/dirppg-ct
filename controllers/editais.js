@@ -35,11 +35,11 @@ router.post("/editais", async (req, res) => {
 router.get("/editais", async (req, res) => {
     const { nucleosIds } = req.query;
     const idsArray = Array.isArray(nucleosIds) ? nucleosIds : nucleosIds.split(",");
-    console.log("Núcleos recebidos no backend:", idsArray);
+    parseInt(idsArray,10);
     try {
-        const editais = await db.editais.findAll({
+        const editais = await db.nucleos_editais.findAll({
             where: {
-                id: {
+                nucleo_id: {
                     [Op.in]: idsArray,
                 }
             }
@@ -51,7 +51,6 @@ router.get("/editais", async (req, res) => {
             acc[Id].push(edital);
             return acc;
         }, {});
-
         res.status(200).json(editaisAgrupados);
     } catch (error) {
         console.error("Erro ao listar editais:", error); 
