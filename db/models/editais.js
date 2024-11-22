@@ -15,8 +15,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   editais.init({
     nucleo:DataTypes.STRING,
-    link1: DataTypes.STRING,
-    link2: DataTypes.STRING,
+    link1: DataTypes.TEXT,
+    link2: DataTypes.TEXT,
     descricao: DataTypes.STRING,
     atividade: DataTypes.STRING,
     periodo: DataTypes.STRING,

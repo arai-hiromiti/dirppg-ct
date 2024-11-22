@@ -5,17 +5,16 @@ const { Op } = require('sequelize');
 
 router.post("/editais", async (req, res) => {
     try {
-        const { nucleo, link_1, link_2, descricao, atividade, periodo, titulo } = req.body;
+        const { nucleo, link1, link2, descricao, atividade, periodo, titulo } = req.body;
         const dados = {
             nucleo,
-            link_1,
-            link_2,
+            link1,
+            link2,
             descricao,
             atividade,
             periodo,
             titulo
         };
-        console.log(dados);
 
         const dadosEditais = await db.editais.create(dados);
         console.log('Edital cadastrado');
@@ -33,25 +32,20 @@ router.post("/editais", async (req, res) => {
 
 
 router.get("/editais", async (req, res) => {
-    const { nucleosIds } = req.query;
-    const idsArray = Array.isArray(nucleosIds) ? nucleosIds : nucleosIds.split(",");
-    parseInt(idsArray,10);
+    const { id } = req.query;
+
+    const idsArray = Array.isArray(id) ? id.map(Number) : id.split(",").map(Number);
+
     try {
-        const editais = await db.nucleos_editais.findAll({
+        const editais = await db.editais.findAll({
             where: {
-                nucleo_id: {
+                id: {
                     [Op.in]: idsArray,
                 }
             }
         });
 
-        const editaisAgrupados = editais.reduce((acc, edital) => {
-            const Id = edital.id;
-            if (!acc[Id]) acc[Id] = [];
-            acc[Id].push(edital);
-            return acc;
-        }, {});
-        res.status(200).json(editaisAgrupados);
+        res.status(200).json(editais);
     } catch (error) {
         console.error("Erro ao listar editais:", error); 
         res.status(500).json({ mensagem: "Erro ao listar editais", erro: error.message });

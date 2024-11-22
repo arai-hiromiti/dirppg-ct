@@ -2,7 +2,6 @@ const express = require ('express');
 const router = express.Router();
 const db = require('../db/models');
 
-//CADASTRAR
 router.post("/nucleos", async (req, res) => {
     try {
         const dados = req.body;
@@ -50,7 +49,6 @@ router.put("/nucleos/:id", async (req, res) => {
     }
 });
 
-// Excluir núcleo
 router.delete("/nucleos/:id", async (req, res) => {
     try {
         const idNucleo = req.params.id;

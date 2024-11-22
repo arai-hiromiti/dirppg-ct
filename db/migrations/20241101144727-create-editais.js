@@ -13,10 +13,10 @@ module.exports = {
         type: Sequelize.STRING
       },
       link1: {
-        type: Sequelize.STRING(500)
+        type: Sequelize.TEXT
       },
       link2: {
-        type: Sequelize.STRING(500)
+        type: Sequelize.TEXT
       },
       descricao: {
         type: Sequelize.TEXT

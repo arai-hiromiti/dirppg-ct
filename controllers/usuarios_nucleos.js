@@ -32,27 +32,22 @@ router.get("/usuarios_nucleos", async (req, res) => {
     }
 });
 
-router.put("/usuarios_nucleo/:id", async (req, res) => {
-    try {
-        const associacao = await db.usuarios_nucleos.findByPk(req.params.id);
-        if (!associacao) {
-            return res.status(404).json({ mensagem: "Associação não encontrada" });
-        }
-        await associacao.update(req.body);
-        res.status(200).json(associacao);
-    } catch (error) {
-        res.status(500).json({ mensagem: "Erro ao atualizar associação", erro: error.message });
-    }
-});
+router.delete("/usuarios_nucleos", async (req, res) => {
+    const { usuario_id, nucleo_id } = req.body;  
+    console.log(usuario_id,nucleo_id);
 
-router.delete("/usuarios_nucleos/:id", async (req, res) => {
     try {
-        const associacao = await db.usuarios_nucleos.findByPk(req.params.id);
+        const associacao = await db.usuarios_nucleos.findOne({
+            where: { usuario_id, nucleo_id }
+        });
+
         if (!associacao) {
             return res.status(404).json({ mensagem: "Associação não encontrada" });
         }
+
         await associacao.destroy();
         res.status(204).send();
+
     } catch (error) {
         res.status(500).json({ mensagem: "Erro ao deletar associação", erro: error.message });
     }

@@ -60,7 +60,7 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        nome: 'PPGEFA' ,
+        nome: 'PPGFA' ,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -118,6 +118,12 @@ module.exports = {
         nome:'DIRPLAD-CT'  ,
         createdAt: new Date(),
         updatedAt: new Date()
+      },
+      {
+        nome:'PPGPGP',
+        createdAt: new Date(),
+        updatedAt: new Date()
+
       },
     
     ]);

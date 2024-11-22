@@ -64,24 +64,29 @@ router.post("/usuarios", async (req, res) => {
     }
 });
 
-router.put("/usuarios/:id",async(req,res)=>{
+router.put("/usuarios",async(req,res)=>{
 
-    var dados=req.body;
+    const dados=req.body;
+    console.log(dados)
 
-    await db.usuarios.update(dados,{where:{id:dados.id}})
-    .then(()=>{
-        return res.json({
+    try{
+        await db.usuarios.update(dados,{where:{id:dados.id}})
+        return res.status(201).json({
             mensagem :"Usuario editado",
         })
-    }).catch(() => {
-        return res.json({
-            mensagem :"Erro ao editar",
-        })
-    });
+    }
+    catch(error){
+        return res.status(500).json({
+            mensagem: "Erro ao Atualizar dados Usuário",
+            erro: error.message
+        });
+    }
+
 });
 
 router.delete("/usuarios/:id",async (req,res)=>{
     const {id} = req.params;
+
     await db.usuarios.destry({
         where:{id}
     }).then(()=>{
