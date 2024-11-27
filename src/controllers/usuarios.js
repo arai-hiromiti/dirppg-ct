@@ -42,6 +42,27 @@ module.exports = {
         }
     },
 
+    checkEmailExists: async (req, res) => {
+        try {
+            const { email } = req.body;
+            if (!email) {
+                return res.status(400).json({ mensagem: "Email não informado." });
+            }
+    
+            const usuarioExistente = await db.usuarios.findOne({ where: { email } });
+            if (usuarioExistente) {
+                return res.status(200).json({ exists: true });
+            }
+    
+            return res.status(200).json({ exists: false });
+        } catch (error) {
+            return res.status(500).json({
+                mensagem: "Erro ao verificar email",
+                erro: error.message
+            });
+        }
+    },
+
     update: async ( req, res) => {
 
         const dados=req.body;

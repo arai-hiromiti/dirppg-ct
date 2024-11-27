@@ -30,14 +30,14 @@ module.exports = {
     },
 
     resetPassword: async (token, novaSenha) => {
+        console.log(novaSenha);
         try {
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
             const usuario = await db.usuarios.findByPk(decoded.id);
             if (!usuario) {
                 throw new Error('Usuário não encontrado.');
             }
-            const senhaHash = await bcrypt.hash(novaSenha, 10);
-            await usuario.update({ senha: senhaHash });
+            await usuario.update({ senha: novaSenha });
         } catch (error) {
             console.log(error);
         }
