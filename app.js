@@ -26,6 +26,19 @@ app.use('/',nucleos_editais);
 app.use('/',redef_senha);
 app.use('/',passwordReset);
 
+app.use((req,res,next) =>{
+    res.header('Acess-Control-Allow-Origin','*');
+    res.header('Acess-Constrol-Allow-Header',
+        'Origin, X-Requrested-With, Content-Type, Accept, Authorization'
+    );
+
+    if(req.method == 'OPTIONS'){
+        res.header('Acess-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+        return res.status(200).send({});
+    };
+    
+    next();
+});
 
 app.listen(3030,'0.0.0.0',() =>{
     console.log("Servidor iniciado");

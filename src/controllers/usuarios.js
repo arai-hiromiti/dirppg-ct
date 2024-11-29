@@ -1,6 +1,5 @@
-const express = require ('express');
-const db = require('../db/models');
-
+const db = require('../models');
+const jwt = require ('jsonwebtoken');
 module.exports = {
 
     login: async ( req, res) => {
@@ -15,7 +14,17 @@ module.exports = {
             if (!senhaValida) {
                 return res.status(401).json({ mensagem: "Senha incorreta" });
             }
-            return res.status(200).json({ mensagem: "Login bem-sucedido", usuario });
+            else{
+                let token = jwt.sign({
+                    id_usuario : usuario.id,
+                },process.env.JWT_SECRET);
+
+                return res.status(200).json({ 
+                    mensagem: "Login bem-sucedido", usuario, 
+                    token:token
+                });
+
+            }
     
         } catch (error) {
             console.error("Erro ao realizar login:", error);
@@ -66,8 +75,9 @@ module.exports = {
     update: async ( req, res) => {
 
         const dados=req.body;
+        
         try{
-            await db.usuarios.update(dados,{where:{id:dados.id}})
+            await db.usuarios.update(dados,{where:{id:usuario.id}})
             return res.status(201).json({
                 mensagem :"Usuario editado",
             })

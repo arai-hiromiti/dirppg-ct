@@ -1,4 +1,4 @@
-const passwordResetService = require('../db/services/passwordReset.js');
+const passwordResetService = require('../services/passwordReset.js');
 
 module.exports = {
     requestReset: async (req, res) => {
