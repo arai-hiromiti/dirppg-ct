@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'edital_id',
         otherKey: 'nucleo_id',
       });
+      this.hasMany(models.prazos, {
+        foreignKey: 'id_edital',
+        as: 'prazos',
+      });
     }
   }
   editais.init({
